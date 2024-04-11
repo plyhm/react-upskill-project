@@ -1,10 +1,12 @@
 # Project Title
 
-Simple overview of use/purpose.
+TeenyTinyWeather
 
 ## Description
 
-An in-depth paragraph about your project and overview of use.
+A small weather app where you can search the world or your current location.
+
+URL: https://teeny-tiny-weather.netlify.app/
 
 ## Getting Started
 
@@ -15,6 +17,7 @@ An in-depth paragraph about your project and overview of use.
   - [Node.js](https://nodejs.org/) (version 12 or higher)
   - [React](https://reactjs.org/) (version 17 or higher)
   - [Vite](https://vitejs.dev/) (version 2 or higher)
+  - [weather-icons-animated] (version ^1.0.1)
 
 ### Installing
 
@@ -178,7 +181,7 @@ Describe here in detail the weekly implementations
   - [ ] The implementations above are examples, delete them and add yours
 
 - **Is there anything in particular that I would benefit from reviewing with the code instructor to enhance or solve my obstacles or roadblocks of the week?**
-  - [ ] Yes
+  - [x ] Yes, haven't figured out the best way to search when pressing enter or if that is desired.
   - [ ] No
   - [ ] Not sure, but would like guidance
   - [ ] The implementations above are examples, delete them and add yours
