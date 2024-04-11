@@ -1,10 +1,9 @@
-import { useState } from "react";
-import { SearchField } from "./components/comptesting/SearchField";
-import { SearchResultList } from "./components/comptesting/SearchResultList";
+
 import { BrowserRouter, Link, Routes, Route } from "react-router-dom";
 import { NavBar } from "./components/NavBar";
 import { Home } from "./Pages/Home";
-import { About } from "./Pages/About";
+import { MyWeather } from "./Pages/MyWeather";
+
 
 export const App = () => {
   return (
@@ -14,10 +13,7 @@ export const App = () => {
           <NavBar />
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
-        
-            {/* <SearchField setSearchResult = {setSearchResult}/>
-        <SearchResultList searchResult = {searchResult}/> */}
+              <Route path="/myweather" element={<MyWeather />} />
             </Routes>
         </main>
       </BrowserRouter>

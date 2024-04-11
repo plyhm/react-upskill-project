@@ -1,12 +1,7 @@
-:root {
+ :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
+  font-weight: 600;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -14,163 +9,93 @@
   -webkit-text-size-adjust: 100%;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+body {
+  max-width: 700px;
+  height: 100vh;
+  margin: 0 auto;
+  background-color: #fff;
 }
 
-body {
-  margin: 0;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+main {
+  margin: 1em;
+  margin-top: 0;
 }
 
 h1 {
-  font-size: 1.5em;
-  line-height: 1.1;
+  font-size: 18px;
+  font-family: "Titan One", sans-serif;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-}
-
-/* APP Component CSS */
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+h2 {
   text-align: center;
+  font-family: "Titan One", sans-serif;
 }
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
-
-/* Bio Comp */
-.bioComp {
-  border: 1px solid red;
-  margin-bottom: 1em;
-}
-
-.dog-card,
-.shopping-card {
-  padding: 2em;
-  border: 1px solid red;
-  margin: 1em 0;
-}
-
-
-
 
 nav {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: baseline;
+  justify-items: center;
   margin-bottom: 20px;
+  font-size: 0.8rem;
+  padding-top: 1em;
 }
 
 nav ul {
   display: flex;
   flex-direction: row;
   list-style: none;
-  justify-content: space-around;
+  justify-content: center;
+  padding: 0;
+}
+
+nav li {
+  margin-right: 12px;
+}
+
+a:visited, a:link {
+  text-decoration: none;
+}
+
+a:active, a:focus, a:hover {
+  font-weight: 800;
+}
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .weather-wrapper {
   display: grid;
-  grid-template-columns: 1fr 2fr;
-  margin: 6em;
-  padding: 3em;
-  border-radius: 15px;
+  margin: 0 auto;
+  border-radius: 5px;
   grid-gap: 2em;
-  border: 2px solid grey;
 }
 
 .weather-icon {
-  grid-column: 1 / span 1;
   background-color: #dfeff8;
-  border-radius: 15px;
+  border-radius: 5px;
+  padding: 1em;
+  text-align: center;
+  border: 1px solid #c0c0c0;
 }
 
 .weather-box {
-  grid-column: 2 / span 1;
-  border-radius: 15px;
+  border-radius: 5px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  padding: 3em;
-  background-color: #dfeff8;
+  background-color: rgba(255, 167, 52, 0.253);
+  border: 1px solid #c0c0c0;
 }
 
 .weather-info{
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   grid-gap: 1rem;
+  padding: 1em;
 }
 
 .weather-info p {
@@ -183,8 +108,10 @@ nav ul {
   flex-direction: row;
   justify-content: space-between;
   background-color: white;
-  border-radius: 10px;
+  border-radius: 5px;
   padding: 15px;
+  align-items: center;
+  border: 1px solid #c0c0c0;
 }
 
 .weather-info svg {
@@ -195,17 +122,76 @@ nav ul {
 input {
   -webkit-appearance: none;
   position: relative;
-  width: 50%;
+  width: 90%;
   height: 30px;
-  border-radius: 25px;
+  border-radius: 5px;
   background-color: #f0f0f0;
   transition: background .3s;
   outline: none;
   cursor: pointer;
   border: 1px solid #c0c0c0;
+  margin-bottom: 1em;
   padding: 15px;
   padding-left: 25px;
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
+}
+
+.search-field {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.search-field ul {
+    width: 90%;
+    border: 1px solid #c0c0c0;
+    border-radius: 5px;
+    list-style: none;
+    
+    margin: 0;
+}
+
+.search-field {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+}
+
+.search-field ul {
+  list-style: none;
+  border-radius: 5px;
+  padding: 15px 10px;
+  margin-top: 60px;
+  text-align: left;
+  cursor: pointer;
+  position: absolute;
+  border: 1px solid #cccccc;
+  background-color: #fff;
+  width: 90%;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2)
+}
+
+.search-field ul li {
+  list-style: none;
+  border-radius: 5px;
+  padding: 15px 10px;
+  cursor: pointer;
+}
+
+.search-field ul li:hover {
+  background-color: #f5f5f5;
+}
+
+
+@media screen and (min-width: 768px) {
+  :root {
+    background-color: rgba(255, 167, 52, 0.1);
+  }
+
+  body {
+    border-right: 1px solid lightgrey;
+    border-left: 1px solid lightgrey;
+  }
 }

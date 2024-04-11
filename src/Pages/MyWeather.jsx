@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
+import { WeatherFetching } from "../components/comptesting/WeatherFetching";
 
-export const About = () => {
+export const MyWeather = () => {
     const [position, setPosition] = useState({ lat: null, lon: null });
   
     useEffect(() => {
@@ -15,17 +16,19 @@ export const About = () => {
         console.log("Geolocation is not available in your browser.");
       }
     }, []);
+    console.log(setPosition)
   
     return (
-      <div>
-        <h2>My Current Location</h2>
+      <div  className="container">
+        <h2>My Weather</h2>
         {position.lat && position.lon ? (
-          <p>
-            Latitude: {position.lat}, Longitude: {position.lon}
-          </p>
+          <>
+            <WeatherFetching latitude = {position.lat} longitude = {position.lon}/>
+          </>
         ) : (
           <p>Loading...</p>
         )}
       </div>
     );
 }
+

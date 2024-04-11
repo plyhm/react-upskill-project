@@ -1,53 +1,27 @@
 import { useState, useEffect } from "react";
-import { useDebounce } from "../../hooks/DebounceHook";
-import { WeatherSvg } from "weather-icons-animated";
-import { Home } from "../../Pages/Home";
-import { SearchResultComp } from "./SearchResultComp";
+import { WeatherFetching } from "./WeatherFetching";
 
 
-export const SearchField = ({setSearchResult}) => {
+export const SearchField = ({searchResult, setSearchResult}) => {
 
+  const [city, setCity] = useState({ city: "", country: ""});
+  const key = import.meta.env.VITE_WEATHER_API_KEY;
+  const lonLatApi = `https://api.openweathermap.org/geo/1.0/direct?q=${city.city},${city.country}&limit=5&appid=${key}`;
+  const [position, setPosition] = useState({ lat: null, lon: null });
+  const [timer, setTimer] = useState(null)
+  const [loadWeather, setLoadWeather] = useState(false)
   
-  const [city, setCity] = useState("")
-  const [weatherInfo, setWeatherInfo] = useState(null);
-  const id = import.meta.env.VITE_WEATHER_API_KEY; 
-  const [weatherMain, setWeatherMain] = useState("");
+  const fetchLonLat = async () => {
 
-  const lonLatApi = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${id}`;
-  
-  
-      const fetchLonLat = async () => {
+    
         try {
           const response = await fetch(lonLatApi);
           const data = await response.json();
           const filteredItems = data.filter(chosenCity => {
-            return chosenCity.name.toLowerCase().includes(city.toLowerCase())
+            return chosenCity.name.toLowerCase().includes(city.city.toLowerCase())
           });
           console.log(filteredItems);
           setSearchResult(filteredItems);
-
-          if (filteredItems) {
-            let lat = data[0].lat;
-            let lon = data[0].lon;
-            const weatherApi = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${id}`;
-
-            try {
-              const newResponse = await fetch(weatherApi);
-              const weatherData = await newResponse.json();
-
-              if (weatherData) {
-                setWeatherInfo(weatherData);
-                setWeatherMain(weatherData.weather[0].main);
-                console.log(weatherData);
-              }
-
-            } catch (error) {
-              console.error("Error fetching the weather fact:", error);
-            }
-            // Logging: Output data to console for debugging
-            console.log(`lat is:${lat}`);
-            console.log(`lon is:${lon}`);
-          }
         } catch (error) {
           // Error Handling: Log any errors during fetch to the console
           console.error("Error fetching the lat/lon fact:", error);
@@ -60,19 +34,61 @@ export const SearchField = ({setSearchResult}) => {
 
   const handleInput = (e) => {
     e.preventDefault()
-    setCity(e.target.value)
-    fetchLonLat()
+    setCity({
+      city: e.target.value
+    })
+
+    clearTimeout(timer)
+
+    const newTimer = setTimeout(() => {
+      fetchLonLat()
+    }, 0)
+
+    setTimer(newTimer)
+    
   }
 
-  //useDebounce(city, 500, SearchField);
-  
-
-  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(position)
+    
+  };
 
   return (
+    <>
     <div className="search-field">
-      <input type="text" placeholder="Enter city name" value={city} onChange={handleInput}/>
-      <SearchResultComp weatherInfo={weatherInfo} weatherMain={weatherMain}/>
+       {/* <form onSubmit={handleSubmit}> */}
+      <input id="searchBox" type="text" placeholder="Enter city name" value={city.city} onChange={handleInput}/>
+      {/* <button type="submit">Get Weather</button> */}
+      {city.city ? (<ul>
+      {
+        searchResult.map((results, id) => {
+            return <li key={id} onClick={(e) => {
+            setCity({city: results.name, country: results.country}); 
+            fetchLonLat();
+            setLoadWeather(current => !current)
+            setPosition({
+              lat: results.lat,
+              lon: results.lon,
+            }); 
+            
+          } 
+        }>{results.name + ", " + results.country}</li>
+      }
+    )
+    }
+    </ul>) : (<></>)}
+      {/* </form> */}
     </div>
+    <div>
+      {loadWeather ? (
+        <>
+      <WeatherFetching latitude = {position.lat} longitude = {position.lon}/>
+      </>
+      )  : (
+        <></>
+      )}
+    </div>
+    </>
   )
 }
