@@ -83,6 +83,7 @@ export const SearchField = ({searchResult, setSearchResult}) => {
     <div>
       {loadWeather ? (
         <>
+        <h2>{city.city}</h2>
       <WeatherFetching latitude = {position.lat} longitude = {position.lon}/>
       </>
       )  : (
