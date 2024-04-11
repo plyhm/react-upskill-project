@@ -47,9 +47,11 @@ export const SearchResultComp = ({weatherInfo, weatherMain}) => {
         {weatherInfo ? (
         <>
           <div className="weather-icon">
+            <div className="weather-icon-inner">
             <WeatherSvg state={weatherIcon} width={100} height={100}/>
             <p>{weatherInfo.main.temp}°C</p>
             <p>{weatherInfo.weather[0].description}</p>
+            </div>
           </div>
           <div className="weather-box">
             <h2>{weatherInfo.name}</h2>

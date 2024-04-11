@@ -10,6 +10,7 @@ export const SearchField = ({searchResult, setSearchResult}) => {
   const [position, setPosition] = useState({ lat: null, lon: null });
   const [timer, setTimer] = useState(null)
   const [loadWeather, setLoadWeather] = useState(false)
+  const [isResultShown, setIsResultShown] = useState(true)
   
   const fetchLonLat = async () => {
 
@@ -34,10 +35,16 @@ export const SearchField = ({searchResult, setSearchResult}) => {
 
   const handleInput = (e) => {
     e.preventDefault()
+    setIsResultShown(true);
     setCity({
       city: e.target.value
-    })
+    })    
+  }
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(position)
+    setLoadWeather(false)
     clearTimeout(timer)
 
     const newTimer = setTimeout(() => {
@@ -45,25 +52,19 @@ export const SearchField = ({searchResult, setSearchResult}) => {
     }, 0)
 
     setTimer(newTimer)
-    
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(position)
-    
   };
 
   return (
     <>
     <div className="search-field">
        {/* <form onSubmit={handleSubmit}> */}
-      <input id="searchBox" type="text" placeholder="Enter city name" value={city.city} onChange={handleInput}/>
+      <input type="search" placeholder="Enter city name" value={city.city} onChange={handleInput} onKeyUp={handleSubmit}/>
       {/* <button type="submit">Get Weather</button> */}
-      {city.city ? (<ul>
+      {city.city && isResultShown ? (<ul>
       {
         searchResult.map((results, id) => {
-            return <li key={id} onClick={(e) => {
+            return <li key={id} onClick={() => {
+            setIsResultShown(false);
             setCity({city: results.name, country: results.country}); 
             fetchLonLat();
             setLoadWeather(current => !current)
@@ -71,7 +72,6 @@ export const SearchField = ({searchResult, setSearchResult}) => {
               lat: results.lat,
               lon: results.lon,
             }); 
-            
           } 
         }>{results.name + ", " + results.country}</li>
       }
