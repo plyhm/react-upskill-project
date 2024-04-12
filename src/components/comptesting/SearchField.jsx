@@ -14,7 +14,6 @@ export const SearchField = ({searchResult, setSearchResult}) => {
   
   const fetchLonLat = async () => {
 
-    
         try {
           const response = await fetch(lonLatApi);
           const data = await response.json();
@@ -49,7 +48,7 @@ export const SearchField = ({searchResult, setSearchResult}) => {
 
     const newTimer = setTimeout(() => {
       fetchLonLat()
-    }, 0)
+    }, 300)
 
     setTimer(newTimer)
   };
